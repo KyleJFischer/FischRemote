@@ -1,38 +1,20 @@
 var http = require('http'),
   fs = require('fs');
-var path = "D:\\RemoteStuff"
-
-var os = require('os');
-
-var os = require('os');
-
-var interfaces = os.networkInterfaces();
-var addresses = [];
-for (var k in interfaces) {
-    for (var k2 in interfaces[k]) {
-        var address = interfaces[k][k2];
-        if (address.family === 'IPv4' && !address.internal) {
-            addresses.push(address.address);
-        }
-    }
-}
-
+var path = "D:\\FRemote\\FischRemote\\FilesInRemote" //Change this line
 
 http.createServer(function(request, response) {
   response.writeHeader(200, {
     "Content-Type": "text/html"
   });
   console.log(request.url)
-  var change = 0;
+
   if (request.url.length > 1 && request.url != "/favicon.ico") {
     launchFile(path + request.url)
-
-    change = 1;
   }
   request.url = "\\"
   var string = "<!DOCTYPE html>"
   string += "<body><center>"
-  string += "<h1>Fisch's Remote</h1>"
+  string += "<h1>Fisch's Remote</h1>"//Give a Custom Name
 
   var items = ""
 
@@ -62,14 +44,8 @@ function launchFile(string) {
   var spawn = require("child_process").spawn,
     child;
   child = spawn("powershell.exe", [string]);
-  child.stdout.on("data", function(data) {
-    console.log("Powershell Data: " + data);
-  });
-  child.stderr.on("data", function(data) {
-    console.log("Powershell Errors: " + data);
-  });
   child.on("exit", function() {
-    console.log("Powershell Script finished");
+    console.log("Launched");
   });
   child.stdin.end(); //end input
 }
