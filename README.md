@@ -6,6 +6,8 @@ Main Idea
 
 This allows you to open certain files on your main pc from another device on your network.
 
+I am using this as a way to learn Node.js
+
 How to use
 1. Change Path to where your files you want to launch
 
